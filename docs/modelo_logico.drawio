@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2026-11-13T19:00:00.000Z" agent="Cursor" version="22.1.0" type="device">
+  <diagram id="modelo-logico-bdi" name="Modelo Lógico">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="titulo" value="Modelo Lógico - bd_final_fmp&#xa;CIDADE 1:N ALUNO | ALUNO N:N CURSO via MATRICULA&#xa;Aprovado pelo grupo: ____/____/______" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="560" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cidade" value="CIDADE&#xa;─────────────&#xa;PK  id_cidade&#xa;    nome&#xa;    uf" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aluno" value="ALUNO&#xa;─────────────&#xa;PK  id_aluno&#xa;    nome&#xa;    email&#xa;    data_nascimento&#xa;FK  id_cidade" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="120" width="220" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="curso" value="CURSO&#xa;─────────────&#xa;PK  id_curso&#xa;    nome&#xa;    sigla" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="820" y="140" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="matricula" value="MATRICULA&#xa;─────────────&#xa;PK,FK  id_aluno&#xa;PK,FK  id_curso&#xa;       data_matricula&#xa;&#xa;PK composta (id_aluno, id_curso)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="450" y="420" width="260" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel1" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=2;" edge="1" parent="1" source="cidade" target="aluno">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel1lbl" value="1 : N" style="edgeLabel;html=1;align=center;fontStyle=1;fontSize=14;" vertex="1" connectable="0" parent="rel1">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel2" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0.35;exitY=1;entryX=0.25;entryY=0;strokeWidth=2;" edge="1" parent="1" source="aluno" target="matricula">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel2lbl" value="1 : N" style="edgeLabel;html=1;align=center;fontStyle=1;fontSize=14;" vertex="1" connectable="0" parent="rel2">
+          <mxGeometry x="-0.2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel3" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0.35;exitY=1;entryX=0.75;entryY=0;strokeWidth=2;" edge="1" parent="1" source="curso" target="matricula">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel3lbl" value="1 : N" style="edgeLabel;html=1;align=center;fontStyle=1;fontSize=14;" vertex="1" connectable="0" parent="rel3">
+          <mxGeometry x="-0.2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="nota" value="Cardinalidades:&#xa;• CIDADE 1:N ALUNO (FK id_cidade em ALUNO)&#xa;• ALUNO N:N CURSO resolvido por MATRICULA&#xa;• MATRICULA: PK composta impede aluno + curso repetidos&#xa;• ON DELETE: cidade→SET NULL | aluno→CASCADE | curso→RESTRICT" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;spacingTop=8;fontSize=12;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="80" y="620" width="520" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

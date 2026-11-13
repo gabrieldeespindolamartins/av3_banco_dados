@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modelo Lógico - bd_final_fmp</title>
+  <style>
+    :root {
+      --ink: #1a2332;
+      --line: #3d4f66;
+      --cidade: #c5daf7;
+      --aluno: #c8e6c0;
+      --curso: #ffe9a8;
+      --matricula: #f5c4c0;
+      --paper: #f7f3ea;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, #e8eef8 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, #efe6d8 0%, transparent 40%),
+        var(--paper);
+      min-height: 100vh;
+      padding: 32px 24px 48px;
+    }
+    h1 {
+      text-align: center;
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+      letter-spacing: 0.02em;
+    }
+    .sub {
+      text-align: center;
+      margin: 0 0 28px;
+      color: #445366;
+      font-size: 0.95rem;
+    }
+    .aprovado {
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 0.9rem;
+      border: 1px dashed #7a8899;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: #fff;
+    }
+    .wrap { text-align: center; }
+    .diagram {
+      position: relative;
+      width: min(980px, 100%);
+      margin: 0 auto;
+      min-height: 520px;
+    }
+    .box {
+      position: absolute;
+      border: 2px solid var(--line);
+      border-radius: 4px;
+      text-align: left;
+      min-width: 200px;
+      box-shadow: 0 6px 18px rgba(26, 35, 50, 0.08);
+      background: #fff;
+      overflow: hidden;
+    }
+    .box h2 {
+      margin: 0;
+      padding: 8px 12px;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--line);
+      text-align: center;
+    }
+    .box ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px 14px 12px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    .pk { font-weight: 700; }
+    .fk { color: #1f4d8c; }
+    .cidade { left: 20px; top: 40px; }
+    .cidade h2 { background: var(--cidade); }
+    .aluno { left: 360px; top: 20px; }
+    .aluno h2 { background: var(--aluno); }
+    .curso { right: 20px; top: 40px; }
+    .curso h2 { background: var(--curso); }
+    .matricula { left: 340px; top: 280px; min-width: 260px; }
+    .matricula h2 { background: var(--matricula); }
+    svg.links {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .notes {
+      width: min(980px, 100%);
+      margin: 36px auto 0;
+      background: #fff;
+      border: 1px solid #c9d0da;
+      border-radius: 8px;
+      padding: 16px 20px;
+      text-align: left;
+    }
+    .notes h3 { margin: 0 0 10px; font-size: 1rem; }
+    .notes ul { margin: 0; padding-left: 18px; line-height: 1.55; }
+    @media print {
+      body { background: #fff; padding: 12px; }
+      .aprovado { border-style: solid; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Modelo Lógico — Sistema Acadêmico (bd_final_fmp)</h1>
+  <p class="sub">Banco de Dados I — FMP · 4 entidades · PKs, FKs e cardinalidades</p>
+  <div class="wrap"><div class="aprovado">Aprovado pelo grupo em: ____ / ____ / ______ &nbsp;|&nbsp; Assinatura/nomes: ________________</div></div>
+
+  <div class="diagram">
+    <svg class="links" viewBox="0 0 980 520" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="222" y1="100" x2="360" y2="95" stroke="#3d4f66" stroke-width="2" />
+      <text x="275" y="85" fill="#1a2332" font-size="14" font-weight="700">1 : N</text>
+      <line x1="470" y1="195" x2="430" y2="280" stroke="#3d4f66" stroke-width="2" />
+      <text x="420" y="245" fill="#1a2332" font-size="14" font-weight="700">1 : N</text>
+      <line x1="820" y1="160" x2="600" y2="280" stroke="#3d4f66" stroke-width="2" />
+      <text x="700" y="210" fill="#1a2332" font-size="14" font-weight="700">1 : N</text>
+      <text x="390" y="510" fill="#445366" font-size="13">ALUNO N:N CURSO resolvido por MATRICULA</text>
+    </svg>
+
+    <div class="box cidade">
+      <h2>CIDADE</h2>
+      <ul>
+        <li class="pk">PK id_cidade</li>
+        <li>nome</li>
+        <li>uf</li>
+      </ul>
+    </div>
+
+    <div class="box aluno">
+      <h2>ALUNO</h2>
+      <ul>
+        <li class="pk">PK id_aluno</li>
+        <li>nome</li>
+        <li>email</li>
+        <li>data_nascimento</li>
+        <li class="fk">FK id_cidade → CIDADE</li>
+      </ul>
+    </div>
+
+    <div class="box curso">
+      <h2>CURSO</h2>
+      <ul>
+        <li class="pk">PK id_curso</li>
+        <li>nome</li>
+        <li>sigla</li>
+      </ul>
+    </div>
+
+    <div class="box matricula">
+      <h2>MATRICULA</h2>
+      <ul>
+        <li class="pk fk">PK,FK id_aluno → ALUNO</li>
+        <li class="pk fk">PK,FK id_curso → CURSO</li>
+        <li>data_matricula</li>
+        <li><em>PK composta (id_aluno, id_curso)</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h3>Cardinalidades e regras</h3>
+    <ul>
+      <li><strong>CIDADE 1:N ALUNO</strong> — uma cidade tem vários alunos; cada aluno aponta para no máximo uma cidade.</li>
+      <li><strong>ALUNO N:N CURSO</strong> — resolvido pela entidade associativa <strong>MATRICULA</strong>.</li>
+      <li><strong>PK composta em MATRICULA</strong> — o par (aluno, curso) identifica a matrícula e impede repetição.</li>
+      <li>Integridade sugerida: cidade excluída → <code>SET NULL</code> no aluno; aluno excluído → <code>CASCADE</code> nas matrículas; curso com matrícula → <code>RESTRICT</code>.</li>
+    </ul>
+  </div>
+</body>
+</html>

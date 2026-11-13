@@ -31,8 +31,13 @@ CREATE TABLE cidade (
 --   sigla    -> obrigatória e não pode repetir
 -- ============================================================
 
--- ESCREVA AQUI O CREATE TABLE curso (...);
-
+CREATE TABLE curso (
+    id_curso INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    sigla VARCHAR(10) NOT NULL,
+    CONSTRAINT uq_curso_nome UNIQUE (nome),
+    CONSTRAINT uq_curso_sigla UNIQUE (sigla)
+);
 
 -- ============================================================
 -- TODO 2 - CRIAR A TABELA ALUNO
@@ -48,8 +53,18 @@ CREATE TABLE cidade (
 --   id_cidade pode ficar NULL.
 -- ============================================================
 
--- ESCREVA AQUI O CREATE TABLE aluno (...);
-
+CREATE TABLE aluno (
+    id_aluno INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    data_nascimento DATE,
+    id_cidade INTEGER,
+    CONSTRAINT uq_aluno_email UNIQUE (email),
+    CONSTRAINT fk_aluno_cidade
+        FOREIGN KEY (id_cidade)
+        REFERENCES cidade (id_cidade)
+        ON DELETE SET NULL
+);
 
 -- ============================================================
 -- TODO 3 - CRIAR A TABELA MATRICULA
@@ -66,4 +81,17 @@ CREATE TABLE cidade (
 --   não permitir excluir CURSO que ainda possui matrículas.
 -- ============================================================
 
--- ESCREVA AQUI O CREATE TABLE matricula (...);
+CREATE TABLE matricula (
+    id_aluno INTEGER NOT NULL,
+    id_curso INTEGER NOT NULL,
+    data_matricula DATE NOT NULL DEFAULT CURRENT_DATE,
+    CONSTRAINT pk_matricula PRIMARY KEY (id_aluno, id_curso),
+    CONSTRAINT fk_matricula_aluno
+        FOREIGN KEY (id_aluno)
+        REFERENCES aluno (id_aluno)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_matricula_curso
+        FOREIGN KEY (id_curso)
+        REFERENCES curso (id_curso)
+        ON DELETE RESTRICT
+);
